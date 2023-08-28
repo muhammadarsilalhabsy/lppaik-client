@@ -1,14 +1,44 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-
-import Home from "./pages/Home";
-import NotFound from "./pages/NotFound";
+import {
+  Home,
+  Kegiatan,
+  DetailKegiatan,
+  NotFound,
+  SharedPage,
+  Login,
+} from "./pages";
+import Exp from "./pages/Exp";
 
 const route = createBrowserRouter([
   {
     path: "/",
-    element: <Home />,
+    element: <SharedPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home />,
+        index: true,
+      },
+      {
+        path: "/login",
+        element: <Login />,
+      },
+      {
+        path: "/kegiatan",
+        element: <Kegiatan />,
+      },
+      {
+        path: "/detail",
+        element: <DetailKegiatan />,
+      },
+      {
+        path: "/exp",
+        element: <Exp />,
+      },
+    ],
   },
+
   {
     path: "*",
     element: <NotFound />,
