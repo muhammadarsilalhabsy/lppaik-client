@@ -9,6 +9,8 @@ import {
   Login,
 } from "./pages";
 import Exp from "./pages/Exp";
+import CreateKegiatan from "./pages/CreateKegiatan";
+import UpdateKegiatan from "./pages/UpdateKegiatan";
 
 const route = createBrowserRouter([
   {
@@ -29,8 +31,16 @@ const route = createBrowserRouter([
         element: <Kegiatan />,
       },
       {
-        path: "/detail",
+        path: "/kegiatan/:id",
         element: <DetailKegiatan />,
+      },
+      {
+        path: "/kegiatan/create",
+        element: <CreateKegiatan />,
+      },
+      {
+        path: "/kegiatan/:id/update",
+        element: <UpdateKegiatan />,
       },
       {
         path: "/exp",

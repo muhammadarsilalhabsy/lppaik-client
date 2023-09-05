@@ -1,6 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { kegiatan } from "../constants/data";
+import { useDispatch, useSelector } from "react-redux";
+import { PREV_IMG } from "../constants/data";
+import {
+  GetActivities,
+  activitySelector,
+} from "../features/activity/activitySlice";
+import { useNavigate } from "react-router-dom";
 const Post = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const activities = useSelector(activitySelector.selectAll);
+
+  console.log(activities);
+  useEffect(() => {
+    dispatch(GetActivities());
+  }, [dispatch]);
+
   const [windowDimension, detectWidth] = useState({
     winWidth: window.innerWidth,
   });
@@ -42,9 +59,9 @@ const Post = () => {
           </p>
         </div>
 
-        {kegiatan.map(({ judul, image, desc, color }, index) => (
+        {activities.map(({ title, image, description, color, id }, index) => (
           <div
-            key={index}
+            key={id}
             className="flex flex-wrap border-2 border-black rounded-lg overflow-hidden mb-10 "
           >
             {index % 2 == 0 || windowDimension.winWidth <= 1024 ? (
@@ -53,43 +70,51 @@ const Post = () => {
                   <div
                     className={`w-11/12 ${color} flex items-center justify-center ex-border mx-auto`}
                   >
-                    <img src={image} alt={image} className="w-2/4 h-2/4 " />
+                    <img
+                      src={PREV_IMG + image}
+                      alt={image}
+                      className="w-2/4 h-2/4 "
+                    />
                   </div>
                 </div>
 
                 <div className="bg-white w-full lg:w-1/2 lg:pt-10 px-6 ">
                   <h3 className="font-semibold text-xl p-4 truncate">
-                    {judul}
+                    {title}
                   </h3>
-                  <p className="text-sm px-4 py-2 leading-6">{desc}</p>
-                  <a
-                    href=""
+                  <p className="text-sm px-4 py-2 leading-6">{description}</p>
+                  <button
+                    onClick={() => navigate(`/kegiatan/${id}`)}
                     className="btn btn-warning mx-4 my-4 ex-border hover:text-white normal-case"
                   >
                     Lihat lebih lanjut
-                  </a>
+                  </button>
                 </div>
               </>
             ) : (
               <>
                 <div className="bg-white w-full px-6 lg:w-1/2 lg:pt-10 border-b-2 lg:border-b-0 lg:border-r-2 border-black">
                   <h3 className="font-semibold text-xl p-4 truncate">
-                    {judul}
+                    {title}
                   </h3>
-                  <p className="text-sm px-4 py-2 leading-6">{desc}</p>
-                  <a
-                    href=""
+                  <p className="text-sm px-4 py-2 leading-6">{description}</p>
+                  <button
+                    onClick={() => navigate(`/kegiatan/${id}`)}
                     className="btn btn-warning mx-4 my-4 ex-border hover:text-white normal-case"
                   >
                     Lihat lebih lanjut
-                  </a>
+                  </button>
                 </div>
 
                 <div className="bg-white p-4 w-full lg:w-1/2 ">
                   <div
                     className={`w-11/12 ${color} flex items-center justify-center ex-border mx-auto`}
                   >
-                    <img src={image} alt={image} className="w-2/4 h-2/4 " />
+                    <img
+                      src={PREV_IMG + image}
+                      alt={image}
+                      className="w-2/4 h-2/4 "
+                    />
                   </div>
                 </div>
               </>

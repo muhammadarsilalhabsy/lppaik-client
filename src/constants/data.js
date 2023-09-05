@@ -1,3 +1,4 @@
+export const PREV_IMG = "http://localhost:8080/api/v1/image/";
 export const linkList = [
   {
     name: "home",
@@ -8,8 +9,8 @@ export const linkList = [
     link: "/kegiatan",
   },
   {
-    name: "BTQ",
-    link: "/about",
+    name: "Experiment",
+    link: "/exp",
   },
 ];
 

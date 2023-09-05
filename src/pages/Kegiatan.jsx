@@ -2,17 +2,19 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { IoMdAddCircle } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import { PREV_IMG } from "../constants/data";
 import {
   GetActivities,
-  ProductSelectors,
+  activitySelector,
 } from "../features/activity/activitySlice";
+import axios from "axios";
 
 const Kegiatan = () => {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
 
-  const activities = useSelector(ProductSelectors.selectAll);
+  const activities = useSelector(activitySelector.selectAll);
   const { user } = useSelector((state) => state.userState);
 
   console.log(activities);
@@ -34,7 +36,7 @@ const Kegiatan = () => {
               <div className="overflow-hidden rounded-md border-2 border-black">
                 <div
                   className="bg-success flex items-center justify-center cursor-pointer"
-                  onClick={() => navigate("/create")}
+                  onClick={() => navigate("/kegiatan/create")}
                 >
                   <div className="py-28">
                     <IoMdAddCircle className="w-20 h-20 mx-auto my-auto text-white " />
@@ -59,14 +61,11 @@ const Kegiatan = () => {
           )}
           {/* second */}
           {activities ? (
-            activities.map(({ image, title, id }) => (
+            activities.map(({ image, title, id, color }) => (
               <div key={id} className=" w-full ">
                 <div className="overflow-hidden rounded-md border-2 border-black">
-                  {/* tambahkan property color di database, table kegaitan dan replace bg-sky-400 dibawah ini*/}
-                  <div
-                    className={`bg-sky-400 flex items-center justify-center`}
-                  >
-                    <img src={image} alt={title} />
+                  <div className={`${color} flex items-center justify-center`}>
+                    <img src={PREV_IMG + image} alt={title} />
                   </div>
                   <h3 className="p-2 font-medium border-t-2 border-black">
                     {title}
@@ -75,7 +74,7 @@ const Kegiatan = () => {
                     <h4 className="p-2 ">Lihat lebih lanjut --</h4>
                     <div className="flex border-l-2 border-black px-5 py-1.5">
                       <button
-                        onClick={() => navigate(`/detail`)}
+                        onClick={() => navigate(`/kegiatan/${id}`)}
                         className="rounded-full px-2 text-sm font-medium btn btn-primary normal-case btn-sm ex-border "
                       >
                         Detail

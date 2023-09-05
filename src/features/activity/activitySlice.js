@@ -31,7 +31,7 @@ export const activitySlice = createSlice({
     });
   },
 });
-export const ProductSelectors = activityAdapter.getSelectors(
+export const activitySelector = activityAdapter.getSelectors(
   (state) => state.activity
 );
 export default activitySlice.reducer;

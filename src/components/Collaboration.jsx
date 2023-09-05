@@ -21,7 +21,7 @@ const Collaboration = () => {
           </div>
           <h2 className="font-bold text-black mb-4 text-3xl ">
             <span>Dibangung</span>
-            <span className="ml-4 underline decoration-wavy underline-offset-8 decoration-[6px]">
+            <span className="ml-4 underline decoration-pink-500 decoration-wavy underline-offset-8 decoration-[6px]">
               bersama
             </span>
           </h2>
